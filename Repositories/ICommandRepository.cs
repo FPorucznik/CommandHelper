@@ -5,8 +5,8 @@ namespace CommandHelper.Repositories
     public interface ICommandRepository
     {
         Task<IEnumerable<Command>> GetCommandsAsync();
-        Task<Command> GetCommandAsync();
-        Task CreateCommandAsync();
+        Task<Command?> GetCommandAsync(Guid id);
+        Task CreateCommandAsync(Command command);
         Task UpdateCommandAsync();
         Task DeleteCommandAsync();
     }

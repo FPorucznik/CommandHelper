@@ -11,9 +11,10 @@ namespace CommandHelper.Repositories
         {
             _context = context;
         }
-        public Task CreateCommandAsync()
+        public async Task CreateCommandAsync(Command command)
         {
-            throw new NotImplementedException();
+            _context.Add(command);
+            await _context.SaveChangesAsync();
         }
 
         public Task DeleteCommandAsync()
@@ -21,9 +22,10 @@ namespace CommandHelper.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Command> GetCommandAsync()
+        public async Task<Command?> GetCommandAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var command = await _context.Commands.SingleOrDefaultAsync(command => command.Id == id);
+            return command;
         }
 
         public async Task<IEnumerable<Command>> GetCommandsAsync()

@@ -15,6 +15,13 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("CommandsDb"))
 );
 builder.Services.AddScoped<ICommandRepository, CommandRepository>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddMvc(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
