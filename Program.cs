@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("CommandsDb"))
 );
+builder.Services.AddScoped<ICommandRepository, CommandRepository>();
 
 var app = builder.Build();
 

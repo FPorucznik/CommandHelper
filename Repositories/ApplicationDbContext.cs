@@ -10,6 +10,6 @@ namespace CommandHelper.Repositories
         {
         }
 
-        public DbSet<Command>? Commands { get; set; }
+        public DbSet<Command> Commands => Set<Command>();
     }
 }

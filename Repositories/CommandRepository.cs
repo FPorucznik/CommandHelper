@@ -1,4 +1,5 @@
 using CommandHelper.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommandHelper.Repositories
 {
@@ -25,9 +26,9 @@ namespace CommandHelper.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Command>> GetCommandsAsync()
+        public async Task<IEnumerable<Command>> GetCommandsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Commands.ToListAsync();
         }
 
         public Task UpdateCommandAsync()
