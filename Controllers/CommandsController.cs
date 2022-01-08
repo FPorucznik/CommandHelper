@@ -50,6 +50,8 @@ namespace CommandHelper.Controllers
             return CreatedAtAction(nameof(GetCommandsAsync), new { id = command.Id }, command);
         }
 
+
+        //DELETE /commands/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCommandAsync(Guid id)
         {

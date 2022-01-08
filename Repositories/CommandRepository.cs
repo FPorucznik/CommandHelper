@@ -34,9 +34,10 @@ namespace CommandHelper.Repositories
             return await _context.Commands.ToListAsync();
         }
 
-        public Task UpdateCommandAsync()
+        public async Task UpdateCommandAsync(Command command)
         {
-            throw new NotImplementedException();
+            _context.Update(command);
+            await _context.SaveChangesAsync();
         }
     }
 }
