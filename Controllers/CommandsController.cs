@@ -65,5 +65,22 @@ namespace CommandHelper.Controllers
             await _repository.DeleteCommandAsync(command);
             return NoContent();
         }
+
+        //PUT /commands/{id}
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateCommandAsync(Guid id, UpdateCommandDto commandDto)
+        {
+            var commandToUpdate = await _repository.GetCommandAsync(id);
+
+            if (commandToUpdate is null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(commandDto, commandToUpdate);
+            await _repository.UpdateCommandAsync(commandToUpdate);
+
+            return NoContent();
+        }
     }
 }
