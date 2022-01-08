@@ -17,9 +17,10 @@ namespace CommandHelper.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteCommandAsync()
+        public async Task DeleteCommandAsync(Command command)
         {
-            throw new NotImplementedException();
+            _context.Remove(command);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Command?> GetCommandAsync(Guid id)

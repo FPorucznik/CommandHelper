@@ -8,6 +8,6 @@ namespace CommandHelper.Repositories
         Task<Command?> GetCommandAsync(Guid id);
         Task CreateCommandAsync(Command command);
         Task UpdateCommandAsync();
-        Task DeleteCommandAsync();
+        Task DeleteCommandAsync(Command command);
     }
 }
