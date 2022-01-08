@@ -50,5 +50,18 @@ namespace CommandHelper.Controllers
             return CreatedAtAction(nameof(GetCommandsAsync), new { id = command.Id }, command);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCommandAsync(Guid id)
+        {
+            var command = await _repository.GetCommandAsync(id);
+
+            if (command is null)
+            {
+                return NotFound();
+            }
+
+            await _repository.DeleteCommandAsync(command);
+            return NoContent();
+        }
     }
 }
