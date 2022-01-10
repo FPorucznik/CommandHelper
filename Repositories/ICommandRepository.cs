@@ -7,7 +7,7 @@ namespace CommandHelper.Repositories
         Task<IEnumerable<Command>> GetCommandsAsync();
         Task<Command?> GetCommandAsync(Guid id);
         Task CreateCommandAsync(Command command);
-        Task UpdateCommandAsync();
-        Task DeleteCommandAsync();
+        Task UpdateCommandAsync(Command command);
+        Task DeleteCommandAsync(Command command);
     }
 }

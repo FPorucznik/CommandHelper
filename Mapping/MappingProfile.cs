@@ -10,6 +10,8 @@ namespace CommandHelper.Mapping
         {
             CreateMap<Command, GetCommandDto>();
             CreateMap<CreateCommandDto, Command>();
+            CreateMap<UpdateCommandDto, Command>();
+            CreateMap<Command, UpdateCommandDto>();
         }
     }
 }

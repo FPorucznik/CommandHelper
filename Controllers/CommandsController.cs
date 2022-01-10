@@ -2,6 +2,7 @@ using AutoMapper;
 using CommandHelper.Dtos;
 using CommandHelper.Models;
 using CommandHelper.Repositories;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommandHelper.Controllers
@@ -50,5 +51,64 @@ namespace CommandHelper.Controllers
             return CreatedAtAction(nameof(GetCommandsAsync), new { id = command.Id }, command);
         }
 
+
+        //DELETE /commands/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCommandAsync(Guid id)
+        {
+            var command = await _repository.GetCommandAsync(id);
+
+            if (command is null)
+            {
+                return NotFound();
+            }
+
+            await _repository.DeleteCommandAsync(command);
+            return NoContent();
+        }
+
+        //PUT /commands/{id}
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateCommandAsync(Guid id, UpdateCommandDto commandDto)
+        {
+            var commandToUpdate = await _repository.GetCommandAsync(id);
+
+            if (commandToUpdate is null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(commandDto, commandToUpdate);
+            await _repository.UpdateCommandAsync(commandToUpdate);
+
+            return NoContent();
+        }
+
+        //PATCH /commands/{id}
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> PartialUpdateCommandAsync(Guid id, JsonPatchDocument<UpdateCommandDto> patchDoc)
+        {
+            var commandToUpdate = await _repository.GetCommandAsync(id);
+
+            if (commandToUpdate is null)
+            {
+                return NotFound();
+            }
+
+            var commandToPatch = _mapper.Map<UpdateCommandDto>(commandToUpdate);
+
+            patchDoc.ApplyTo(commandToPatch, ModelState);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _mapper.Map(commandToPatch, commandToUpdate);
+
+            await _repository.UpdateCommandAsync(commandToUpdate);
+
+            return NoContent();
+        }
     }
 }
