@@ -3,7 +3,14 @@
 The main purpose of the project was to be a handy helper when it comes to getting quick access to different sorts of commands used in various command prompts/terminals which we can add and then easily get when needed so even if we don't remember how to use a command we can quickly fetch it from our api.
 The api provides necessary endpoints for managing commands with their description and available platforms.
 Example of stored data:
- <img width="204" alt="demo3" src="https://user-images.githubusercontent.com/56200864/149641054-c5982964-6c1c-4e8b-9d83-de275457b8a9.PNG">
+ ```json
+ {
+	 "id": "20b2683b-6df9-4f7f-b40b-08d9d1b8efcd",
+	 "action": "move to directory",
+	 "line": "cd <path>",
+	 "platform": "windows/linux"
+ }
+ ```
 
 # Used technologies
 - C#
